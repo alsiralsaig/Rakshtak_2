@@ -158,12 +158,12 @@ export default function Map({
   const label = pickupName || resolvedName || "موقعي الحالي";
 
   return (
-    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-blue-950/70 bg-[#08132a]">
+    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-sky-800/70 bg-[#082f49]">
       <div ref={boxRef} className="absolute inset-0 z-0" />
 
       {interactive && (
         <div className="absolute top-2 right-2 left-2 z-[500] pointer-events-none flex justify-center">
-          <span className="bg-[#0f2347]/90 backdrop-blur-md text-slate-200 text-[11px] px-3 py-1.5 rounded-full border border-blue-900/50 shadow-lg">
+          <span className="bg-[#075985]/90 backdrop-blur-md text-slate-200 text-[11px] px-3 py-1.5 rounded-full border border-sky-700/50 shadow-lg">
             📍 دوس على الخريطة لتحديد مكانك بالضبط
           </span>
         </div>
@@ -173,7 +173,7 @@ export default function Map({
         type="button"
         onClick={locateNow}
         disabled={locating}
-        className="absolute top-2 left-2 z-[500] bg-[#0f2347]/90 hover:bg-[#1a3564] text-white px-2.5 py-2 rounded-xl border border-blue-900/60 shadow-xl backdrop-blur-md flex items-center gap-1.5 text-[11px] active:scale-95 transition-all"
+        className="absolute top-2 left-2 z-[500] bg-[#075985]/90 hover:bg-[#0284c7] text-white px-2.5 py-2 rounded-xl border border-sky-700/60 shadow-xl backdrop-blur-md flex items-center gap-1.5 text-[11px] active:scale-95 transition-all"
       >
         <span className={locating ? "animate-spin" : ""}>📍</span>
         <span>{locating ? "جاري التحديد..." : "موقعي الحالي"}</span>
@@ -185,7 +185,7 @@ export default function Map({
         </div>
       )}
 
-      <div className="absolute bottom-2 right-2 left-2 z-[500] bg-[#0f2347]/90 backdrop-blur-md border border-blue-950/70 p-2 rounded-xl flex items-center justify-between text-[12px] text-white shadow-lg pointer-events-none">
+      <div className="absolute bottom-2 right-2 left-2 z-[500] bg-[#075985]/90 backdrop-blur-md border border-sky-800/70 p-2 rounded-xl flex items-center justify-between text-[12px] text-white shadow-lg pointer-events-none">
         <span className="flex items-center gap-1.5 min-w-0">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
           <strong className="text-amber-400 truncate">{label}</strong>
