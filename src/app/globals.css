@@ -4,38 +4,38 @@
 
 /* ===== ثيم ركشتك الأزرق المتدرج (خلفيات التطبيق) ===== */
 .rk-bg-gradient {
-  background: linear-gradient(180deg, #050b1a 0%, #0a1830 55%, #102a52 100%);
+  background: linear-gradient(180deg, #0d2145 0%, #163a6e 55%, #1e4a8a 100%);
 }
 .rk-card {
-  background: #0b1a33;
+  background: #16305c;
 }
 .rk-card-light {
-  background: #122747;
+  background: #1e4278;
 }
 
-/* ===== خريطة Leaflet بثيم ركشتك الأزرق الداكن ===== */
+/* ===== خريطة Leaflet بثيم ركشتك الأزرق ===== */
 .leaflet-container {
-  background: #08132a;
+  background: #142b52;
   font-family: inherit;
   direction: ltr;
 }
 .leaflet-bar a {
-  background: #12294d !important;
+  background: #1c3d70 !important;
   color: #f5a70a !important;
-  border-color: #26375f !important;
+  border-color: #35538a !important;
 }
 .leaflet-bar a:hover {
-  background: #1a2c52 !important;
+  background: #244a86 !important;
 }
 .leaflet-control-attribution {
-  background: rgba(8, 19, 42, 0.75) !important;
-  color: #8b98ab !important;
+  background: rgba(20, 43, 82, 0.75) !important;
+  color: #9fb0c8 !important;
   font-size: 9px !important;
   padding: 1px 5px !important;
   direction: rtl;
 }
 .leaflet-control-attribution a {
-  color: #8b98ab !important;
+  color: #9fb0c8 !important;
 }
 
 /* دبوس الموقع */
