@@ -518,7 +518,7 @@ export default function DriverDashboard() {
   const showDriver = stage === "ready" && profile;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#050b1a] via-[#0a1830] to-[#102a52] text-slate-100 p-4 flex flex-col justify-between w-full min-w-full">
+    <div className="min-h-screen bg-gradient-to-b from-[#0d2145] via-[#163a6e] to-[#1e4a8a] text-slate-100 p-4 flex flex-col justify-between w-full min-w-full">
       <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-between space-y-4">
         <header className="flex justify-between items-center pt-2 pb-1">
           <div className="flex items-center gap-2">
@@ -551,10 +551,10 @@ export default function DriverDashboard() {
                 <div>
                   <label className="text-xs font-semibold text-slate-300 mb-1.5 block text-right">📞 رقم الهاتف:</label>
                   <div
-                    className="flex items-stretch border border-blue-900/60 rounded-xl overflow-hidden bg-[#0b1830] focus-within:border-amber-500"
+                    className="flex items-stretch border border-blue-900/60 rounded-xl overflow-hidden bg-[#16305c] focus-within:border-amber-500"
                     style={{ direction: 'ltr' }}
                   >
-                    <div className="bg-[#122747] text-amber-400 px-3.5 py-3 text-sm font-mono font-bold border-r border-blue-900/60 flex items-center gap-1.5 select-none shrink-0">
+                    <div className="bg-[#1e4278] text-amber-400 px-3.5 py-3 text-sm font-mono font-bold border-r border-blue-900/60 flex items-center gap-1.5 select-none shrink-0">
                       <span>🇸🇩</span>
                       <span style={{ direction: 'ltr', unicodeBidi: 'isolate' }}>+249</span>
                     </div>
@@ -597,7 +597,7 @@ export default function DriverDashboard() {
                     value={codeDigits}
                     onChange={(e) => setCodeDigits(e.target.value.replace(/\D/g, "").slice(0, 6))}
                     placeholder="000000"
-                    className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono text-center tracking-[0.5em]"
+                    className="w-full bg-[#16305c] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono text-center tracking-[0.5em]"
                     dir="ltr"
                   />
                   {previewCode && (
@@ -615,7 +615,7 @@ export default function DriverDashboard() {
                       value={nameDraft}
                       onChange={(e) => setNameDraft(e.target.value)}
                       placeholder="اختياري"
-                      className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                      className="w-full bg-[#16305c] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
                     />
                   </div>
                   <div>
@@ -625,7 +625,7 @@ export default function DriverDashboard() {
                       value={vehicleDraft}
                       onChange={(e) => setVehicleDraft(e.target.value)}
                       placeholder="مثال: ركشة"
-                      className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                      className="w-full bg-[#16305c] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
@@ -636,7 +636,7 @@ export default function DriverDashboard() {
                     value={bankDraft}
                     onChange={(e) => setBankDraft(e.target.value.replace(/\s+/g, ""))}
                     placeholder="اختياري — لتحويل المستحقات"
-                    className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none font-mono text-right focus:border-amber-500"
+                    className="w-full bg-[#16305c] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none font-mono text-right focus:border-amber-500"
                   />
                 </div>
                 <button
@@ -665,7 +665,7 @@ export default function DriverDashboard() {
         ) : showDriver ? (
           <>
             {/* شريط معلومات السائق */}
-            <div className="flex items-center justify-between bg-[#0b1830] p-3 rounded-2xl border border-blue-950/70 gap-2">
+            <div className="flex items-center justify-between bg-[#16305c] p-3 rounded-2xl border border-blue-950/70 gap-2">
               <div className="text-xs text-slate-300 space-y-1 min-w-0">
                 <div className="truncate">
                   {profile.name ? <span className="font-bold text-white">👤 {profile.name}</span> : null}{" "}
@@ -678,7 +678,7 @@ export default function DriverDashboard() {
                     <button
                       type="button"
                       onClick={() => setShowBank((s) => !s)}
-                      className="text-[9px] bg-[#122747] hover:bg-[#1a3564] text-slate-400 px-1.5 py-0.5 rounded border border-blue-900/60 transition"
+                      className="text-[9px] bg-[#1e4278] hover:bg-[#28518f] text-slate-400 px-1.5 py-0.5 rounded border border-blue-900/60 transition"
                     >
                       {showBank ? "إخفاء" : "إظهار"}
                     </button>
@@ -704,7 +704,7 @@ export default function DriverDashboard() {
                     setAuthInfo(null);
                     setAuthError(null);
                   }}
-                  className="text-[10px] font-bold text-slate-300 hover:text-white bg-[#122747]/60 px-2.5 py-1.5 rounded-lg border border-blue-900/60 transition"
+                  className="text-[10px] font-bold text-slate-300 hover:text-white bg-[#1e4278]/60 px-2.5 py-1.5 rounded-lg border border-blue-900/60 transition"
                 >
                   تعديل البيانات ✏️
                 </button>
@@ -712,7 +712,7 @@ export default function DriverDashboard() {
             </div>
 
             {editingProfile && (
-              <div className="bg-[#0b1830] border border-blue-900/60 rounded-2xl p-4 space-y-3">
+              <div className="bg-[#16305c] border border-blue-900/60 rounded-2xl p-4 space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="text-[10px] font-semibold text-slate-300 mb-1 block text-right">الاسم:</label>
@@ -720,7 +720,7 @@ export default function DriverDashboard() {
                       type="text"
                       value={nameDraft}
                       onChange={(e) => setNameDraft(e.target.value)}
-                      className="w-full bg-[#0f2347] border border-blue-900/60 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-[#1c3f74] border border-blue-900/60 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
                   <div>
@@ -729,7 +729,7 @@ export default function DriverDashboard() {
                       type="text"
                       value={vehicleDraft}
                       onChange={(e) => setVehicleDraft(e.target.value)}
-                      className="w-full bg-[#0f2347] border border-blue-900/60 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
+                      className="w-full bg-[#1c3f74] border border-blue-900/60 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500"
                     />
                   </div>
                 </div>
@@ -739,7 +739,7 @@ export default function DriverDashboard() {
                     type="text"
                     value={bankDraft}
                     onChange={(e) => setBankDraft(e.target.value.replace(/\s+/g, ""))}
-                    className="w-full bg-[#0f2347] border border-blue-900/60 rounded-lg px-3 py-2 text-sm text-white focus:outline-none font-mono text-right focus:border-amber-500"
+                    className="w-full bg-[#1c3f74] border border-blue-900/60 rounded-lg px-3 py-2 text-sm text-white focus:outline-none font-mono text-right focus:border-amber-500"
                   />
                 </div>
                 <div className="flex gap-2">
@@ -754,7 +754,7 @@ export default function DriverDashboard() {
                   <button
                     type="button"
                     onClick={() => setEditingProfile(false)}
-                    className="px-4 py-2.5 bg-[#122747] hover:bg-[#1a3564] text-slate-300 font-bold text-xs rounded-xl transition"
+                    className="px-4 py-2.5 bg-[#1e4278] hover:bg-[#28518f] text-slate-300 font-bold text-xs rounded-xl transition"
                   >
                     إلغاء
                   </button>
@@ -764,7 +764,7 @@ export default function DriverDashboard() {
 
             {/* حالة التواجد + الموقع */}
             <div className="space-y-2">
-              <div className="flex justify-between items-center bg-[#0b1830] p-3 rounded-2xl border border-blue-950/70">
+              <div className="flex justify-between items-center bg-[#16305c] p-3 rounded-2xl border border-blue-950/70">
                 <span className="text-sm font-semibold text-slate-300">حالة التواجد:</span>
                 <button
                   onClick={toggleAvailability}
@@ -779,7 +779,7 @@ export default function DriverDashboard() {
                 </button>
               </div>
 
-              <div className="flex items-center justify-between bg-[#0b1830] p-3 rounded-2xl border border-blue-950/70">
+              <div className="flex items-center justify-between bg-[#16305c] p-3 rounded-2xl border border-blue-950/70">
                 <span className="text-xs text-slate-300">
                   {coords
                     ? "📍 موقعك مفعّل — نعرض الطلبات الأقرب خلال 10 كم"
@@ -789,7 +789,7 @@ export default function DriverDashboard() {
                   type="button"
                   onClick={() => locateDriver(true)}
                   disabled={locating}
-                  className="text-[10px] bg-[#122747] hover:bg-[#1a3564] text-amber-400 px-2.5 py-1.5 rounded-lg border border-blue-900/60 font-bold transition disabled:opacity-50"
+                  className="text-[10px] bg-[#1e4278] hover:bg-[#28518f] text-amber-400 px-2.5 py-1.5 rounded-lg border border-blue-900/60 font-bold transition disabled:opacity-50"
                 >
                   {locating ? "..." : "تحديث موقعي"}
                 </button>
@@ -808,7 +808,7 @@ export default function DriverDashboard() {
                 className={`py-3 text-xs font-extrabold rounded-xl border transition ${
                   activeTab === "available"
                     ? "bg-amber-500 text-slate-950 border-amber-500 shadow-md"
-                    : "bg-[#0b1830] text-slate-400 border-blue-950/70 hover:text-white"
+                    : "bg-[#16305c] text-slate-400 border-blue-950/70 hover:text-white"
                 }`}
               >
                 الطلبات المتاحة 🔔 ({availableRides.length})
@@ -818,7 +818,7 @@ export default function DriverDashboard() {
                 className={`py-3 text-xs font-extrabold rounded-xl border transition ${
                   activeTab === "current"
                     ? "bg-amber-500 text-slate-950 border-amber-500 shadow-md"
-                    : "bg-[#0b1830] text-slate-400 border-blue-950/70 hover:text-white"
+                    : "bg-[#16305c] text-slate-400 border-blue-950/70 hover:text-white"
                 }`}
               >
                 المشوار الحالي 🚖 {currentRide ? "(1)" : "(0)"}
@@ -829,16 +829,16 @@ export default function DriverDashboard() {
             {activeTab === "available" ? (
               <div className="space-y-3 flex-1">
                 {!isAvailable ? (
-                  <div className="text-center py-8 bg-[#0b1830] border border-blue-950/70 rounded-2xl text-slate-500 text-xs font-medium">
+                  <div className="text-center py-8 bg-[#16305c] border border-blue-950/70 rounded-2xl text-slate-500 text-xs font-medium">
                     أنت في وضع «مشغول / استراحة 🔴» — الطلبات الجديدة لن تُقبل منك.
                   </div>
                 ) : availableRides.length === 0 ? (
-                  <div className="text-center py-8 bg-[#0b1830] border border-blue-950/70 rounded-2xl text-slate-500 text-xs font-medium">
+                  <div className="text-center py-8 bg-[#16305c] border border-blue-950/70 rounded-2xl text-slate-500 text-xs font-medium">
                     لا توجد طلبات قريبة حالياً. انتظر قليلاً... ⏳
                   </div>
                 ) : (
                   availableRides.map((ride) => (
-                    <div key={ride.id} className="bg-[#0b1830] border border-blue-900/70 rounded-2xl p-4 space-y-3 shadow-lg">
+                    <div key={ride.id} className="bg-[#16305c] border border-blue-900/70 rounded-2xl p-4 space-y-3 shadow-lg">
                       <div className="flex justify-between items-center text-xs border-b border-blue-950/70 pb-2.5">
                         <span className="font-bold text-white text-sm">👤 {ride.passengerName}</span>
                         <div className="flex items-center gap-1.5">
@@ -885,11 +885,11 @@ export default function DriverDashboard() {
             ) : (
               <div className="space-y-3 flex-1">
                 {!currentRide ? (
-                  <div className="text-center py-8 bg-[#0b1830] border border-blue-950/70 rounded-2xl text-slate-500 text-xs font-medium">
+                  <div className="text-center py-8 bg-[#16305c] border border-blue-950/70 rounded-2xl text-slate-500 text-xs font-medium">
                     لا توجد رحلة حالية قيد التنفيذ.
                   </div>
                 ) : (
-                  <div className="bg-[#0b1830] border border-blue-900/70 rounded-2xl p-4 space-y-3.5 shadow-lg">
+                  <div className="bg-[#16305c] border border-blue-900/70 rounded-2xl p-4 space-y-3.5 shadow-lg">
                     <div className="flex justify-between items-center text-xs border-b border-blue-950/70 pb-2.5">
                       <span className="font-bold text-emerald-400 text-sm">🟢 مشوار جاري (مشواري أنا)</span>
                       <span className="font-bold text-white text-sm">👤 {currentRide.passengerName}</span>
@@ -917,7 +917,7 @@ export default function DriverDashboard() {
                     <div className="grid grid-cols-2 gap-2 pt-1">
                       <a
                         href={`tel:${currentRide.phoneNumber}`}
-                        className="py-2.5 bg-[#122747] hover:bg-[#1a3564] text-slate-200 text-center text-xs font-bold rounded-xl border border-blue-900/60 transition"
+                        className="py-2.5 bg-[#1e4278] hover:bg-[#28518f] text-slate-200 text-center text-xs font-bold rounded-xl border border-blue-900/60 transition"
                       >
                         اتصال بالزبون 📞
                       </a>
@@ -947,4 +947,4 @@ export default function DriverDashboard() {
       </div>
     </div>
   );
-}
+                    }
