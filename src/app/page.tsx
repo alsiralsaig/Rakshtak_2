@@ -277,7 +277,7 @@ export default function PassengerHome() {
   const formattedPrice = formatPrice(activeRide?.offeredPrice);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#050b1a] via-[#0a1830] to-[#102a52] text-slate-100 p-4 flex flex-col justify-between w-full min-w-full">
+    <div className="min-h-screen bg-gradient-to-b from-[#082f49] via-[#0c4a6e] to-[#0369a1] text-slate-100 p-4 flex flex-col justify-between w-full min-w-full">
       <div className="w-full max-w-xl mx-auto flex-1 flex flex-col justify-between space-y-5">
         {/* الشريط العلوي */}
         <header className="flex justify-between items-center pt-2 pb-1">
@@ -296,7 +296,7 @@ export default function PassengerHome() {
         </header>
 
         {/* الخريطة */}
-        <div className="w-full h-52 rounded-2xl overflow-hidden border border-blue-900/40 shadow-xl shrink-0">
+        <div className="w-full h-52 rounded-2xl overflow-hidden border border-sky-700/40 shadow-xl shrink-0">
           <Map
             pickupName={pickupLocation || "موقعي الحالي"}
             interactive
@@ -326,7 +326,7 @@ export default function PassengerHome() {
                   value={passengerName}
                   onChange={(e) => setPassengerName(e.target.value)}
                   placeholder="اسمك الكريم"
-                  className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-[#0c4a6e] border border-sky-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
                 />
               </div>
 
@@ -335,7 +335,7 @@ export default function PassengerHome() {
                 <select
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value)}
-                  className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3 py-3 text-sm text-amber-400 font-bold focus:outline-none focus:border-amber-500"
+                  className="w-full bg-[#0c4a6e] border border-sky-700/60 rounded-xl px-3 py-3 text-sm text-amber-400 font-bold focus:outline-none focus:border-amber-500"
                 >
                   {SERVICE_TYPES.map((s) => (
                     <option key={s.value} value={s.value}>
@@ -349,10 +349,10 @@ export default function PassengerHome() {
             <div>
               <label className="text-xs font-semibold text-slate-300 mb-1.5 block text-right">📞 رقم الهاتف:</label>
               <div
-                className="flex items-stretch border border-blue-900/60 rounded-xl overflow-hidden bg-[#0b1830] focus-within:border-amber-500"
+                className="flex items-stretch border border-sky-700/60 rounded-xl overflow-hidden bg-[#0c4a6e] focus-within:border-amber-500"
                 style={{ direction: 'ltr' }}
               >
-                <div className="bg-[#122747] text-amber-400 px-3.5 py-3 text-sm font-mono font-bold border-r border-blue-900/60 flex items-center gap-1.5 select-none shrink-0">
+                <div className="bg-[#075985] text-amber-400 px-3.5 py-3 text-sm font-mono font-bold border-r border-sky-700/60 flex items-center gap-1.5 select-none shrink-0">
                   <span>🇸🇩</span>
                   <span style={{ direction: 'ltr', unicodeBidi: 'isolate' }}>+249</span>
                 </div>
@@ -380,7 +380,7 @@ export default function PassengerHome() {
                   value={pickupLocation}
                   onChange={(e) => setPickupLocation(e.target.value)}
                   placeholder="دوس على الخريطة أو اكتب المكان"
-                  className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-[#0c4a6e] border border-sky-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
                 />
               </div>
 
@@ -393,7 +393,7 @@ export default function PassengerHome() {
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
                   placeholder="مثال: حي المطار"
-                  className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-[#0c4a6e] border border-sky-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
                 />
               </div>
             </div>
@@ -407,7 +407,7 @@ export default function PassengerHome() {
                 value={offeredPrice}
                 onChange={(e) => setOfferedPrice(e.target.value)}
                 placeholder="أدخل المبلغ المقترح"
-                className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none font-mono text-right focus:border-amber-500"
+                className="w-full bg-[#0c4a6e] border border-sky-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none font-mono text-right focus:border-amber-500"
               />
             </div>
 
@@ -420,7 +420,7 @@ export default function PassengerHome() {
             </button>
           </form>
         ) : (
-          <div className="bg-[#0b1830] border border-blue-900/60 rounded-2xl p-5 space-y-4 my-auto shadow-2xl">
+          <div className="bg-[#0c4a6e] border border-sky-700/60 rounded-2xl p-5 space-y-4 my-auto shadow-2xl">
             {activeRide.status === "pending" ? (
               <div className="text-center space-y-3">
                 <span className="text-3xl animate-bounce inline-block">⏳</span>
@@ -431,7 +431,7 @@ export default function PassengerHome() {
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-bold border ${
                     searchTimedOut
                       ? "bg-red-500/10 text-red-400 border-red-500/30"
-                      : "bg-[#122747]/60 text-slate-300 border-blue-900/60"
+                      : "bg-[#075985]/60 text-slate-300 border-sky-700/60"
                   }`}
                 >
                   ⏱️ {searchTimedOut ? "انتهت المهلة" : `المتبقي ${formatCountdown(searchSecondsLeft)}`}
@@ -489,7 +489,7 @@ export default function PassengerHome() {
               </div>
             )}
 
-            <div className="text-xs space-y-2 border-t border-b border-blue-950/70 py-3 text-slate-300">
+            <div className="text-xs space-y-2 border-t border-b border-sky-800/70 py-3 text-slate-300">
               <div>📍 <strong>من:</strong> {activeRide.pickupLocation}</div>
               <div>🏁 <strong>إلى:</strong> {activeRide.destination}</div>
               {formattedPrice && (
@@ -514,4 +514,4 @@ export default function PassengerHome() {
       </div>
     </div>
   );
-}
+  }
