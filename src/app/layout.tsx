@@ -3,7 +3,7 @@ import "./globals.css";
 
 // 1️⃣ تصدير الـ Viewport بشكل مستقل (لحله تحذير themeColor)
 export const viewport: Viewport = {
-  themeColor: "#0a1830",
+  themeColor: "#0c4a6e",
   width: "device-width",
   initialScale: 1,
 };
