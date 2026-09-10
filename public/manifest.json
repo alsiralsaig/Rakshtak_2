@@ -1,0 +1,24 @@
+{
+  "short_name": "ركشتك",
+  "name": "ركشتك - Rakshatak",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#050b1a",
+  "theme_color": "#0a1830",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/"
+}
