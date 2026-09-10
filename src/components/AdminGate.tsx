@@ -111,7 +111,7 @@ export default function AdminGate({
 
   if (!ready || verifying) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#050b1a] via-[#0a1830] to-[#102a52] flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-[#082f49] via-[#0c4a6e] to-[#0369a1] flex items-center justify-center">
         <div className="text-slate-500 text-sm animate-pulse">جاري التحقق...</div>
       </div>
     );
@@ -122,10 +122,10 @@ export default function AdminGate({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#050b1a] via-[#0a1830] to-[#102a52] text-slate-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#082f49] via-[#0c4a6e] to-[#0369a1] text-slate-100 flex items-center justify-center p-4">
       <form
         onSubmit={submit}
-        className="w-full max-w-sm bg-[#0f2347] border border-blue-950/70 rounded-3xl p-6 space-y-4 shadow-2xl"
+        className="w-full max-w-sm bg-[#075985] border border-sky-800/70 rounded-3xl p-6 space-y-4 shadow-2xl"
       >
         <div className="text-center space-y-1.5">
           <div className="text-4xl">🔐</div>
@@ -144,7 +144,7 @@ export default function AdminGate({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="رمز الإدارة"
-          className="w-full bg-[#0b1830] border border-blue-900/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono text-left disabled:opacity-50"
+          className="w-full bg-[#0c4a6e] border border-sky-700/60 rounded-xl px-3.5 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono text-left disabled:opacity-50"
           dir="ltr"
         />
 
