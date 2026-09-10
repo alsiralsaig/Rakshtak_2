@@ -1,53 +1,51 @@
-import { NextRequest, NextResponse } from "next/server";
+/**
+ * أدوات تنسيق مشتركة (الهاتف السوداني + الأسعار + قناع الحساب البنكي)
+ */
 
 /**
- * الترويسة التي يحملها أي طلب إداري:
- *   x-admin-token: <قيمة RAKSHTAK_ADMIN_TOKEN>
- * (يقبل أيضاً Authorization: Bearer <الرمز>)
+ * تطبيع رقم هاتف سوداني من أي صيغة إدخال شائعة:
+ *   0912345678 | 912345678 | +249912345678 | 00249912345678 | +249 91 234 5678
+ * يرجع الصيغة الموحدة "+2499XXXXXXXX" أو null إذا كان الرقم غير صالح (9 أرقام تبدأ بـ 9).
  */
-export const ADMIN_TOKEN_HEADER = "x-admin-token";
+export function normalizeSudanesePhone(raw: string): string | null {
+  let digits = (raw || "").replace(/\D/g, "");
+  if (!digits) return null;
 
-/** مقارنة ثابتة الزمن (تجنّب هجمات التوقيت) */
-export function safeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) {
-    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return diff === 0;
+  // إزالة بادئات دولية: 00 ثم 249 ثم 0 محلي
+  if (digits.startsWith("00")) digits = digits.slice(2);
+  if (digits.startsWith("249")) digits = digits.slice(3);
+  if (digits.startsWith("0")) digits = digits.slice(1);
+
+  return /^9\d{8}$/.test(digits) ? `+249${digits}` : null;
+}
+
+/** تحقق سريع من أن النص رقم سوداني صحيح (نفس منطق التطبيع) */
+export function isValidSudanesePhone(raw: string): boolean {
+  return normalizeSudanesePhone(raw) !== null;
+}
+
+/** تنسيق مبلغ بفاصلات الآلاف — مثال: 1,500 ج.س */
+export function formatPrice(value: number | string | null | undefined): string {
+  if (value === null || value === undefined || value === "") return "";
+  const n = Number(value);
+  if (!Number.isFinite(n) || n < 0) return "";
+  return n.toLocaleString("en-US", { maximumFractionDigits: 0 });
 }
 
 /**
- * بوابة الحماية لكل المسارات الإدارية:
- * - بدون إعداد RAKSHTAK_ADMIN_TOKEN على الخادم ← ممنوع (403) (الوضع الآمن المتعمّد)
- * - بترويسة خاطئة أو ناقصة ← ممنوع (403)
+ * قناع رقم الحساب البنكي: يُظهر آخر 4 أرقام فقط.
+ * مثال: 1234567890 ← ••••••7890
  */
-export function requireAdminToken(request: NextRequest): NextResponse | null {
-  const expected = process.env.RAKSHTAK_ADMIN_TOKEN || "";
-  if (!expected) {
-    return NextResponse.json(
-      {
-        error:
-          "الإدارة مقفولة: RAKSHTAK_ADMIN_TOKEN غير مضبوط على الخادم (أضفه في Vercel ثم أعد النشر).",
-      },
-      { status: 403 }
-    );
-  }
+export function maskAccount(account: string | null | undefined): string {
+  const digits = (account || "").replace(/\s+/g, "");
+  if (!digits) return "";
+  if (digits.length <= 4) return "••••";
+  return `••••••${digits.slice(-4)}`;
+}
 
-  const bearer = request.headers.get("authorization") || "";
-  const provided =
-    request.headers.get(ADMIN_TOKEN_HEADER) ||
-    (bearer.startsWith("Bearer ") ? bearer.slice(7) : "") ||
-    "";
-
-  if (!provided || !safeEqual(provided, expected)) {
-    return NextResponse.json(
-      {
-        error: "غير مصرح: أضف ترويسة x-admin-token بقيمة RAKSHTAK_ADMIN_TOKEN الصحيحة.",
-      },
-      { status: 403 }
-    );
-  }
-
-  return null;
+/** صيغة mm:ss للعدّاد */
+export function formatCountdown(totalSeconds: number): string {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
