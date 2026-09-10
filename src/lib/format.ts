@@ -5,7 +5,9 @@
 /**
  * تطبيع رقم هاتف سوداني من أي صيغة إدخال شائعة:
  *   0912345678 | 912345678 | +249912345678 | 00249912345678 | +249 91 234 5678
- * يرجع الصيغة الموحدة "+2499XXXXXXXX" أو null إذا كان الرقم غير صالح (9 أرقام تبدأ بـ 9).
+ *   0114537190 | 114537190 (أرقام سوداني/Sudatel التي تبدأ بـ 1)
+ * يرجع الصيغة الموحدة "+249XXXXXXXXX" أو null إذا كان الرقم غير صالح.
+ * الأرقام السودانية الصحيحة: 9 أرقام تبدأ بـ 9 (زين/MTN) أو تبدأ بـ 1 (سوداني/Sudatel).
  */
 export function normalizeSudanesePhone(raw: string): string | null {
   let digits = (raw || "").replace(/\D/g, "");
@@ -16,7 +18,7 @@ export function normalizeSudanesePhone(raw: string): string | null {
   if (digits.startsWith("249")) digits = digits.slice(3);
   if (digits.startsWith("0")) digits = digits.slice(1);
 
-  return /^9\d{8}$/.test(digits) ? `+249${digits}` : null;
+  return /^[19]\d{8}$/.test(digits) ? `+249${digits}` : null;
 }
 
 /** تحقق سريع من أن النص رقم سوداني صحيح (نفس منطق التطبيع) */
