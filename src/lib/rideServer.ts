@@ -143,4 +143,133 @@ export interface RideRow extends Record<string, unknown> {}
 /** إنشاء رحلة جديدة — يرجع {ride, riderToken} */
 export async function createRide(input: CreateRideInput) {
   const admin = getSupabaseAdmin();
-  const riderToken = 
+  const riderToken = generateRiderToken();
+
+  const { data, error } = await admin
+    .from("rides")
+    .insert({
+      passenger_name: input.passengerName,
+      phone_number: input.phoneNumber,
+      pickup_location: input.pickupLocation,
+      destination: input.destination,
+      service_type: input.serviceType,
+      offered_price: input.offeredPrice,
+      status: "pending",
+      pickup_lat: input.pickupLat,
+      pickup_lng: input.pickupLng,
+      rider_token: riderToken,
+    })
+    .select()
+    .single();
+
+  if (error || !data) {
+    throw new Error("تعذر حفظ الطلب: " + (error?.message || "خطأ غير معروف"));
+  }
+  return { ride: toSafeRide(data as Record<string, unknown>), riderToken };
+}
+
+/** جلب رحلة */
+export async function loadRide(rideId: number): Promise<RideRow | null> {
+  const admin = getSupabaseAdmin();
+  const { data } = await admin.from("rides").select("*").eq("id", rideId).maybeSingle();
+  return (data as RideRow | null) ?? null;
+}
+
+/** إلغاء (لصاحبها بالرمز/لسائقها/للإدارة) */
+export async function cancelRide(
+  rideId: number,
+  where: { riderToken?: string; driverId?: number; driverPhone?: string; admin?: boolean }
+): Promise<{ ok: boolean; error?: string }> {
+  const admin = getSupabaseAdmin();
+  const row = await loadRide(rideId);
+  if (!row) return { ok: false, error: "الرحلة غير موجودة" };
+
+  const allowed =
+    where.admin === true ||
+    (where.riderToken ? riderTokenMatches(String(row.rider_token || ""), where.riderToken) : false) ||
+    (where.driverId !== undefined && Number(row.driver_id) === where.driverId) ||
+    (where.driverPhone ? row.driver_phone === where.driverPhone : false);
+
+  if (!allowed) {
+    return { ok: false, error: "غير مصرح بإلغاء هذه الرحلة" };
+  }
+
+  const { error } = await admin
+    .from("rides")
+    .update({ status: "cancelled" })
+    .eq("id", rideId)
+    .in("status", ["pending", "accepted"]);
+
+  if (error) return { ok: false, error: "فشل الإلغاء: " + error.message };
+  return { ok: true };
+}
+
+/** رفع السعر 20% (صاحب الرحلة فقط وهي pending) */
+export async function raisePrice(
+  rideId: number,
+  riderToken: string
+): Promise<{ ok: boolean; price?: number; error?: string }> {
+  const admin = getSupabaseAdmin();
+  const row = await loadRide(rideId);
+  if (!row) return { ok: false, error: "الرحلة غير موجودة" };
+  if (!riderTokenMatches(String(row.rider_token || ""), riderToken)) {
+    return { ok: false, error: "غير مصرح بهذه الرحلة" };
+  }
+  if (row.status !== "pending") {
+    return { ok: false, error: "لا يمكن رفع السعر إلا أثناء البحث عن سائق" };
+  }
+
+  const current = Number(row.offered_price);
+  const newPrice =
+    Number.isFinite(current) && current > 0 ? Math.round(current * 1.2) : 0;
+  if (newPrice <= 0) return { ok: false, error: "حدّد سعراً أولاً في نموذج الطلب" };
+
+  const { error } = await admin.from("rides").update({ offered_price: newPrice }).eq("id", rideId);
+  if (error) return { ok: false, error: "فشل رفع السعر: " + error.message };
+  return { ok: true, price: newPrice };
+}
+
+/** قبول شرطي (يمنع القبول المزدوج): pending → accepted */
+export async function acceptRide(rideId: number, driverId: number, driverPhone: string) {
+  const admin = getSupabaseAdmin();
+
+  const { data, error } = await admin
+    .from("rides")
+    .update({
+      status: "accepted",
+      driver_id: driverId,
+      driver_phone: driverPhone,
+    })
+    .eq("id", rideId)
+    .eq("status", "pending")
+    .select()
+    .single();
+
+  if (error) {
+    // لا صفوف مطابقة = سُبق القبول
+    if (String(error.message).includes("0 rows")) {
+      return { ok: false, conflict: true };
+    }
+    return { ok: false, conflict: false, error: "فشل القبول: " + error.message };
+  }
+  if (!data) return { ok: false, conflict: true };
+  return { ok: true, ride: toDriverRide(data as Record<string, unknown>) };
+}
+
+/** إنهاء مشوار السائق نفسه */
+export async function completeRide(
+  rideId: number,
+  driverId: number,
+  driverPhone: string
+): Promise<{ ok: boolean; error?: string }> {
+  const admin = getSupabaseAdmin();
+  const row = await loadRide(rideId);
+  if (!row) return { ok: false, error: "الرحلة غير موجودة" };
+  if (row.status !== "accepted") return { ok: false, error: "الرحلة ليست قيد التنفيذ" };
+  const mine = Number(row.driver_id) === driverId || row.driver_phone === driverPhone;
+  if (!mine) return { ok: false, error: "هذه ليست رحلتك" };
+
+  const { error } = await admin.from("rides").update({ status: "completed" }).eq("id", rideId);
+  if (error) return { ok: false, error: "فشل الإنهاء: " + error.message };
+  return { ok: true };
+}
