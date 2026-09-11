@@ -1,6 +1,6 @@
 {
   "name": "rakshtak",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,15 +10,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.4",
     "@supabase/supabase-js": "^2.39.0",
-    "drizzle-orm": "^0.36.4",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.263.1",
     "next": "14.2.3",
-    "pg": "^8.13.0",
-    "pusher": "^5.2.0",
-    "pusher-js": "^8.4.0",
     "react": "^18",
     "react-dom": "^18"
   },
