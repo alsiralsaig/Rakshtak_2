@@ -135,4 +135,17 @@ export async function verifyOtp(phone: string, code: string): Promise<OtpVerifyR
     return { ok: false, status: 400, error: "انتهت صلاحية الرمز — اطلب رمزاً جديداً" };
   }
 
-  if ((row.attempts ?? 0) >= 
+  if ((row.attempts ?? 0) >= OTP_MAX_ATTEMPTS) {
+    await admin.from("otp_codes").delete().eq("id", row.id);
+    return { ok: false, status: 429, error: "محاولات كثيرة — اطلب رمزاً جديداً" };
+  }
+
+  if (hashOtp(phone, cleanCode) !== row.code_hash) {
+    await admin.from("otp_codes").update({ attempts: (row.attempts ?? 0) + 1 }).eq("id", row.id);
+    return { ok: false, status: 401, error: "الرمز غير صحيح — تحقق وأعد المحاولة" };
+  }
+
+  // نجاح: إتلاف الرمز فوراً (منع إعادة الاستخدام)
+  await admin.from("otp_codes").delete().eq("phone", phone);
+  return { ok: true };
+}
